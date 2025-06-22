@@ -10,7 +10,7 @@ class Tienda(ABC):
     self.productos = []
 
   @abstractmethod
-  def ingresar_producto(self, producto):
+  def ingresar_producto(self, nombre, precio, stock = 0):
     pass
 
   @abstractmethod
@@ -18,21 +18,20 @@ class Tienda(ABC):
     pass
 
   @abstractmethod
-  def vender_producto(self, producto):
+  def vender_producto(self, nombre_producto, cantidad):
     pass
 
-# Subclase que -->hereda<-- de la principal
+# Subclase Restaurante -->hereda<-- de la principal Tienda
 class Restaurante(Tienda):
-  def __init__(self, nombre: str, delivery):
-       super().__init__(nombre, delivery)
-       print(f"nombre restaurante: {nombre} valor delivery: {delivery}")
+  def __init__(self, nombre, delivery):
+    super().__init__(nombre, delivery)
+    print(f"nombre restaurante: {nombre} valor delivery: {delivery}")
 
-  def ingresar_producto(self, producto: Producto):
-    for p in self.productos:
-        if p == producto:
-            p += producto
-            return
-    self.productos.append(producto)
+  def ingresar_producto(self, nombre, precio, stock = 0):
+    nuevo_producto = Producto(nombre, precio, stock)  # Stock siempre es 0 en Restaurante
+    for producto in self.productos:
+       if producto == nuevo_producto:
+          
 
   def listar_productos(self):
     for producto in self.productos:
