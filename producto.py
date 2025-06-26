@@ -7,7 +7,6 @@ class Producto:
     def __eq__(self, other):
         if isinstance(other, Producto):
             return self.__nombre == other.__nombre
-        return False
 
     def __add__(self, other):
         if isinstance(other, Producto) and self.__nombre == other.__nombre:

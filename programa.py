@@ -1,5 +1,5 @@
 from tienda import Restaurante, Supermercado, Farmacia
-
+# método para crear restaurante, supermercado o farmacia
 def crear_tienda():
     tipo_tienda = input("Ingrese el tipo de tienda (Restaurante, Supermercado, Farmacia): ")
     nombre_tienda = input("Ingrese el nombre de la tienda: ")
@@ -13,7 +13,7 @@ def crear_tienda():
     else:
         print("Tipo de tienda no válido.")
         return None
-
+# método con bucle para ingreso de productos
 def ingresar_productos(tienda):
     while True:
         continuar = input("¿Desea ingresar un producto? (si/no): ")

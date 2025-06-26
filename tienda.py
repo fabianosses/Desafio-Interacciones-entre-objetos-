@@ -29,9 +29,11 @@ class Tienda(ABC):
   
 # Subclase Restaurante -->hereda<-- de la principal Tienda
 class Restaurante(Tienda):
+
   def __init__(self, nombre, delivery):
     super().__init__(nombre, delivery)
     print(f"nombre restaurante: {nombre} valor delivery: {delivery}")
+    # método ingreso de producto
   def ingresar_producto(self, nombre, precio, stock = 0):
     nuevo_producto = Producto(nombre, precio, stock)  # Stock siempre es 0 en Restaurante
     print(nuevo_producto)
@@ -39,12 +41,15 @@ class Restaurante(Tienda):
        if producto == nuevo_producto:
           producto + nuevo_producto
           return
+    # agregar nuevo producto a lista de productos
     self.productos.append(nuevo_producto)
+  # mostrar lista de productos
   def listar_productos(self):
     result = f"Productos en {self._nombre}:\n"
     for producto in self.productos:
         result += f"- {producto.get_nombre()}, Precio: {producto.get_precio()}\n"  # Oculta el stock
     return result
+  # venta de prodcuto
   def vender_producto(self, nombre_producto, cantidad):
         # No es necesario validar stock en Restaurante
         producto_encontrado = False
@@ -61,13 +66,16 @@ class Restaurante(Tienda):
 class Supermercado(Tienda):
   def __init__(self, nombre, delivery):
        super().__init__(nombre, delivery)
+  # método ingreso de prodcuto
   def ingresar_producto(self, nombre, precio, stock=0):
       nuevo_producto = Producto(nombre, precio, stock)
       for producto in self.productos:
         if producto == nuevo_producto:
           producto + nuevo_producto
           return
+      # ingreso de prodcuto a lista de productos
       self.productos.append(nuevo_producto)
+  # mostrar lista de productos
   def listar_productos(self):
     result = f"Productos en {self._nombre}:\n"
     for producto in self.productos:
@@ -76,6 +84,7 @@ class Supermercado(Tienda):
           stock_info += " (Pocos productos disponibles)"
         result += f"- {producto.get_nombre()}, Precio: {producto.get_precio()}{stock_info}\n"
     return result
+  # venta de prodcuto
   def vender_producto(self, nombre_producto, cantidad):
     for producto in self.productos:
       if producto.get_nombre() == nombre_producto:
@@ -97,6 +106,7 @@ class Farmacia(Tienda):
   def __init__(self, nombre, delivery):
       super().__init__(nombre, delivery)
       print(f"nombre farmacia: {nombre} valor delivery: {delivery}")
+  # método ingreso de prodcuto
   def ingresar_producto(self, nombre, precio, stock=0):
       nuevo_producto = Producto(nombre, precio, stock)
       for producto in self.productos:
@@ -104,6 +114,7 @@ class Farmacia(Tienda):
           producto + nuevo_producto
           return
       self.productos.append(nuevo_producto)
+  # método mostrar productos
   def listar_productos(self):
       result = f"Productos en {self._nombre}:\n"
       for producto in self.productos:
@@ -112,6 +123,7 @@ class Farmacia(Tienda):
               precio_info += " (Envío gratis al solicitar este producto)"
           result += f"- {producto.get_nombre()}, {precio_info}\n"  # Oculta el stock
       return result
+  # venta de productos
   def vender_producto(self, nombre_producto, cantidad):
     if cantidad > 3:
         print("No se puede solicitar una cantidad superior a 3 por producto en Farmacia.")
